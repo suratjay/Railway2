@@ -1,0 +1,40 @@
+<div class="panel panel-default " [style.background]="'url(/assets/images/Background_Login.jpg)'">
+    <div class="row">
+        <div class="signin">
+            <form [formGroup]="form" (submit)="onSubmit()">
+                <h2 style="color: white;">เข้าสู่ระบบ</h2>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" formControlName="userName" autocomplete="off"
+                        placeholder="ชื่อผู้ใช้งาน">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" formControlName="userPassword" placeholder="รหัสผ่าน">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-sign-in"></i> เข้าสู่ระบบ
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>

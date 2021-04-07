@@ -1,0 +1,119 @@
+<app-auth-content>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-3">
+                <select [(ngModel)]="divisionID" class="custom-select custom-select-lg mb-3"
+                    (change)="onChangeDivision()">
+                    <option [value]="0">-- เลือกกองบริหาร --</option>
+                    <option *ngFor="let item of divisionList" [value]="item.DIVISION_TABLE_SEQ">
+                        {{ item.DIVISION_NAME }} </option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select [(ngModel)]="privinceID" class="custom-select custom-select-lg mb-3"
+                    (change)="onChangeProvince()">
+                    <option [value]="0">-- เลือกจังหวัด --</option>
+                    <option *ngFor="let item of provinceList" [value]="item.CHANGWAT_TABLE_SEQ">
+                        {{ item.STATION_CHANGWAT }} </option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select [(ngModel)]="stationId" class="custom-select custom-select-lg mb-3">
+                    <option [value]="0">-- เลือกสถานี --</option>
+                    <option *ngFor="let item of stationList" [value]="item.STATION_CODE">
+                        {{ item.STATION_DESC }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <button class="btn btn-primary" (click)="onSearchById()"> <i class="fa fa-search"></i> ค้นหา</button>
+            </div>
+
+
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <div align="center">ลำดับ</div>
+                            </th>
+                            <th scope="col">
+                                <div align="center">จังหวัด</div>
+                            </th>
+                            <th scope="col">
+                                <div align="center">สถานี</div>
+                            </th>
+                            <th scope="col" style="width: 170px;">
+                                <div align="center">เลขที่สัญญาเช่า</div>
+                            </th>
+                            <th scope="col">
+                                <div align="center">ชื่อผู้เช่า</div>
+                            </th>
+                            <th scope="col" style="width: 170px;">
+                                <div align="center">ปัจจัยอาคารสำรวจ</div>
+                            </th>
+                            <th scope="col" style="width: 170px;">
+                                <div align="center">ประเมินราคา</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr *ngFor="let item of getPagingItems(Contracts) "> -->
+                        <tr *ngFor="let item of contractItems  | pagination: startPage : limitPage">
+                            <td align="center"> {{contractItems.indexOf(item)+1}} </td>
+                            <td> {{item.STATION_CHANGWAT}} </td>
+                            <td> {{item.STATION_DESC}} </td>
+                            <td> {{item.CONTRACT_CODE}} </td>
+                            <td> {{item.CUS_NAME}} </td>
+                            <td align="center">
+                                <i class="fa" data-toggle="tooltip" title="เพิ่มปัจจัย" (click)="onCreateFactor(item)">
+                                    <img src="assets/icons/icons8-add-64.png" style="width: 32px;" />
+                                </i> |
+                                <i class="fa" data-toggle="tooltip" title="แก้ไขปัจจัย" (click)="onUpdateFactor(item)">
+                                    <img src="assets/icons/icons8-edit-64.png" style="width: 32px;" />
+                                </i> |
+                                <i class="fa" data-toggle="tooltip" title="ไฟล์ PDF">
+                                    <img src="assets/icons/icons8-pdf-64.png" style="width: 32px;" />
+                                </i>
+                            </td>
+                            <td>
+                                <i class="fa" data-toggle="tooltip" title="ประเมินราคา">
+                                    <img src="assets/icons/icons8-building-64.png" style="width: 32px;" />
+                                </i> |
+                                <i class="fa" data-toggle="tooltip" title="มูลค่าทรัพย์สิน">
+                                    <img src="assets/icons/icons8-price-64.png" style="width: 32px;" />
+                                </i> |
+                                <i class="fa" data-toggle="tooltip" title="ประเมินนอก">
+                                    <img src="assets/icons/icons8-real-estate-64.png" style="width: 32px;" />
+                                </i>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="7" *ngIf="contractItems">
+                                สัญญาทั้งหมด {{ contractItems.length }} รายการ
+                            </th>
+                            <th colspan="7" *ngIf="!contractItems">
+                                สัญญาทั้งหมด 0 รายการ
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="col-md-12" *ngIf="contractItems">
+                <pagination [(ngModel)]="startPage" [itemsPerPage]="limitPage" [rotate]="false" [maxSize]="10"
+                    previousText="ก่อนหน้า" nextText="ถัดไป" [totalItems]="contractItems.length">
+                </pagination>
+            </div>
+
+        </div>
+    </div>
+
+</app-auth-content>

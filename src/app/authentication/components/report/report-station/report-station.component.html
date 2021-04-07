@@ -1,0 +1,73 @@
+<app-auth-content>
+
+    <div class="row">
+        <button class="btn btn-primary" (click)="exportexcel()"><i class="fa fa-file-excel-o"></i> Export File</button>
+    </div>
+
+    <div class="row">
+        <div style="overflow-x:auto;">
+            <!-- <table id="excel-table" class="table table-bordered"> -->
+            <table id="excel-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div align="center">ลำดับ</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 80px;">กอง</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 80px;">รหัสสถานี</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 100px;">ชื่อสถานี</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 100px;">ขนาดพื้นที่ (ไร่-งาน-วา)</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 100px;">ขนาดพื้นที่ (ตร.ว.)</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 110px;">รวมมูลค่าที่ดิน (บาท)</div>
+                        </th>
+                        <!-- <th scope="col">
+                            <div align="center" style="width: 200px;">รวมมูลค่าที่ดินของราชการ</div>
+                        </th> -->
+                        <th scope="col">
+                            <div align="center" style="width: 190px;">มูลค่าสิ่งปลูกสร้างที่กรรมสิทธิ์ของการรถไฟฯ (บาท)
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 190px;">มูลค่าสิ่งปลูกสร้างที่ไม่กรรมสิทธิ์ของการรถไฟฯ
+                                (บาท)</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 140px;">รวมมูลค่าทรัพย์สิน (บาท)</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="center" *ngFor="let item of reportItems">
+                        <!-- <tr align=" center" *ngFor="let item of reportItems  | pagination: startPage : limitPage"> -->
+                        <td> {{reportItems.indexOf(item)+1}} </td>
+                        <td> {{ item.DIVISION_NAME }} </td>
+                        <td> {{ item.STATION_CODE }} </td>
+                        <td> {{ item.STATION_DESC }} </td>
+                        <td> {{ item.AREA }} </td>
+                        <td> {{ item.LAND_AREA | number }} </td>
+                        <td> {{ item.SELECT_FIN | number }} </td>
+                        <!-- <td> {{ item.VAR_PER_WA | number }} </td> -->
+                        <td> {{ item.SUM_PRICE_OWNER | number }} </td>
+                        <td> {{ item.SUM_PRICE_NO_OWNER | number }} </td>
+                        <td> {{ item.SUMPRICE | number }} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <pagination [(ngModel)]="startPage" [itemsPerPage]="limitPage" [rotate]="false" [maxSize]="10"
+                previousText="ก่อนหน้า" nextText="ถัดไป" [totalItems]="reportItems.length">
+            </pagination> -->
+        </div>
+    </div>
+
+</app-auth-content>

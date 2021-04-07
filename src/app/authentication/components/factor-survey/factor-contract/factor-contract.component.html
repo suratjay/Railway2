@@ -1,0 +1,293 @@
+<app-auth-content>
+
+    <div class="col-md-12"><br></div>
+
+    <div class="row panel-heading">
+        <p>
+            <i class="fa fa-file-text-o" aria-hidden="true" style="color: red">
+            </i> แบบสำรวจข้อมูลตามสัญญา
+        </p>
+    </div>
+
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <div class="row col-c">
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-12" *ngFor="let item of contractData">
+                <h4>จังวหวัด : {{ item.STATION_CHANGWAT }} | สถานี : {{ item.STATION_DESC }} |
+                    เลขที่สัญญา : {{ item.CONTRACT_CODE }} | ชื่อผู้เช่า : {{ item.CUS_NAME }}</h4>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <label> 1.บ้านเลขที่ </label>
+                <input type="text" class="form-control" formControlName="address" autocomplete="off">
+            </div>
+            <div class="col-md-4">
+                <label> 2.ซอย </label>
+                <input type="text" class="form-control" formControlName="soi" autocomplete="off">
+            </div>
+            <div class="col-md-4">
+                <label> 3.ถนน </label>
+                <input type="text" class="form-control" formControlName="road" autocomplete="off">
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <label> 4.โครงสร้างอาคาร </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of strucBuilding">
+                    <input class="form-check-input" type="radio" formControlName="structureBuilding" [value]="item">
+                    <label class="form-check-label"> {{item}} </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> 5.ประเภทสิ่งปลูกสร้าง </label>
+                <input type="text" class="form-control" formControlName="buildingType" autocomplete="off">
+            </div>
+            <div class="col-md-4">
+                <label> 6.จำนวนชั้น </label>
+                <input type="text" class="form-control" formControlName="numberFloors" autocomplete="off">
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-2">
+                <label> 7.ขนาดอาคารประมาณ </label>
+                <input type="text" class="form-control" autocomplete="off" formControlName="sizeWidth"
+                    placeholder="ความกว้าง ( เมตร )">
+            </div>
+            <div class="col-md-2">
+                <label> <br> </label>
+                <input type="text" class="form-control" autocomplete="off" formControlName="sizeLong"
+                    placeholder="ความยาว ( เมตร )">
+            </div>
+            <div class="col-md-4">
+                <label> 8.พื้นที่ใช้สอยประมาณ </label>
+                <input type="text" class="form-control" autocomplete="off" formControlName="landUseSpace">
+            </div>
+            <div class="col-md-4">
+                <label> 9.อายุอาคารประมาณ ( ปี ) </label>
+                <input type="text" class="form-control" autocomplete="off" formControlName="ageBuilding">
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-12">
+                <label> 10.โครงสร้างอาคารและวัสดุตกแต่ง </label>
+            </div>
+
+            <div class="col-md-4">
+                <label> - รูปแบบอาคาร </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of hiLow">
+                    <input class="form-check-input" type="radio" formControlName="buildingModel" [value]="item">
+                    <label class="form-check-label"> {{item}} </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - คุณภาพของวัสดุก่อสร้าง </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of hiLow">
+                    <input class="form-check-input" type="radio" formControlName="qualityMaterials" [value]="item">
+                    <label class="form-check-label"> {{item}} </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - สภาพอาคารปัจจุบัน </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of buildingCon">
+                    <input class="form-check-input" type="radio" formControlName="buildingCondition" [value]="item">
+                    <label class="form-check-label"> {{item}} </label>
+                </div>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <label> - การต่อเติมดัดแปลง </label>
+                <input type="text" class="form-control" autocomplete="off" formControlName="modifyBuilding">
+            </div>
+            <div class="col-md-4">
+                <label> - โครงหลังคา </label><br>
+                <!-- <div class="form-check form-check-inline" *ngFor="let item of roofFrames; let i=index">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxroofFrame($event)">
+                        {{item}}
+                    </label>
+                </div> -->
+                <label formArrayName="roofFrame" *ngFor="let order of ordersFormArray.controls; let i = index">
+                    <input type="checkbox" [formControlName]="i">
+                    {{roofFrames[i]}}
+                </label>
+                <!-- <label formArrayName="roofFrame" *ngFor="let order of ordersFormArray.controls;">
+                    <input type="checkbox" [formControlName]="order">
+                    {{roofFrames[order]}}
+                </label> -->
+                <!-- <input *ngFor="let control of form.controls['myValues'].controls"
+                type="checkbox" id="checkbox-1" value="value-1" [formControl]="control" />     -->
+            </div>
+            <div class="col-md-4">
+                <label> - วัสดุมุงหลังคา </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of roofMaterials">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxroofMaterials($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <label> - โครงสร้างหลัก </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of mainstructure">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxmainStructure($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - ฝ้าเพดาน </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of celling">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxceiling($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - พื้นและวัสดุผิวพื้น </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of floorMaterials">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxfloorMaterials($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <label> - ผนังและวัสดุผิว </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of wallMaterials">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxwallMaterials($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - ประตูภายนอก </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of door">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxdoor($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - ประตูภายใน </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of door">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxdoorIn($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <label> - หน้าต่าง </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of window">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxwindow($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - พื้นและวัสดุผิวพื้นห้องน้ำ </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of toilet">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxtoilet($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> - สุขภัณฑ์ </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of sanitaryWare">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxsanitaryWare($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <label> 11.งานระบบภายในอาคาร </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of buildingSystem">
+                    <label>
+                        <input type="checkbox" [value]="item" (change)="onCheckboxbuildingSystem($event)">
+                        {{item}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> 12.การใช้ประโยชน์ </label>
+                <input type="text" class="form-control" autocomplete="off" formControlName="landUse"><br>
+                <div class="form-check form-check-inline" *ngFor="let item of landUse">
+                    <input class="form-check-input" type="radio" formControlName="landUseRa" [value]="item.va">
+                    <label class="form-check-label"> {{item.name}} </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label> 13.การเข้าตรวจสอบภายในอาคาร </label><br>
+                <div class="form-check form-check-inline" *ngFor="let item of yesNo">
+                    <input class="form-check-input" type="radio" formControlName="inBuiding" [value]="item">
+                    <label class="form-check-label"> {{item}} </label>
+                </div><br>
+                <div>
+                    <input type="text" class="form-control" autocomplete="off" formControlName="opsInBuiding">
+                </div>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-6">
+                <label> หมายเหตุ </label>
+                <input type="text" class="form-control" autocomplete="off" formControlName="note">
+            </div>
+            <div class="col-md-6">
+                <label> วันที่สำรวจ </label>
+                <input type="date" class="form-control" autocomplete="off" formControlName="date">
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+            <div class="col-md-4">
+                <button class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
+            </div>
+
+            <div class="col-md-12"><br></div>
+
+        </div>
+
+        <!-- <div formArrayName="countries" class="well well-lg">
+            <div *ngFor="let country of countries.controls; let i=index" [formGroupName]="i" >
+                <div *ngFor="let key of country.controls | mapToKeys" >
+                    <input type="checkbox" formControlName="{{key.key}}">{{key.key}}
+                </div>
+            </div>
+        </div> -->
+    </form>
+
+    
+
+    <div class="col-md-12"><br></div>
+
+</app-auth-content>

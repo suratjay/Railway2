@@ -1,0 +1,107 @@
+<app-auth-content>
+
+    <div class="row">
+        <div class="container">
+            <!-- <div> -->
+            <table id="excel-table" class="table table-bordered">
+                <thead>
+                    <tr align="center">
+                        <th scope="col">
+                            <div>ลำดับ</div>
+                        </th>
+                        <th scope="col">
+                            <div style="width: 100px;">ชื่อสถานี</div>
+                        </th>
+                        <th scope="col">
+                            <div style="width: 150px;">รายการสัญญาเช่า</div>
+                        </th>
+                        <th scope="col">
+                            <div style="width: 160px;">ไฟล์สแกนสัญญาเช่า</div>
+                        </th>
+                        <th scope="col">
+                            <div style="width: 90px;">ผังสถานี</div>
+                        </th>
+                        <th scope="col">
+                            <div style="width: 160px;">Layout แบบสำรวจ</div>
+                        </th>
+                        <th scope="col">
+                            <div style="width: 90px;">แนวท่อ</div>
+                        </th>
+                        <th scope="col">
+                            <div style="width: 160px;">สถานะการเชื่อมข้อมูล</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr align="center" *ngFor="let item of stationItems"> -->
+                    <tr align=" center" *ngFor="let item of stationItems  | pagination: startPage : limitPage">
+                        <td> {{stationItems.indexOf(item)+1}} </td>
+                        <td> {{ item.STATION_DESC }} </td>
+                        <td>
+                            <i *ngIf="item.CONTRACT_REPORT_PATH" class="fa" data-toggle="tooltip" title="ดาวน์โหลด">
+                                <a href="assets/SURVEY/REPORT/1001_รายการสัญญาเช่า.rar"
+                                    download="1001_รายการสัญญาเช่า.rar">
+                                    <img src="assets/icons/icons8-downloading-updates-64.png" style="width: 32px;" />
+                                </a>
+                            </i>
+                            <i *ngIf="!item.CONTRACT_REPORT_PATH" data-toggle="tooltip" title="ไม่มีไฟล์">
+                                <img src="assets/icons/icons8-no-entry-64.png" style="width: 32px;" />
+                            </i>
+                        </td>
+                        <td>
+                            <i *ngIf="item.CONTRACT_PDF_PATH" class="fa" data-toggle="tooltip" title="ดาวน์โหลด">
+                                <a href="assets/icons/icons8-downloading-updates-64.png"
+                                    download="icons8-downloading-updates-64.png">
+                                    <img src="assets/icons/icons8-downloading-updates-64.png" style="width: 32px;" />
+                                </a>
+                            </i>
+                            <i *ngIf="!item.CONTRACT_PDF_PATH" data-toggle="tooltip" title="ไม่มีไฟล์">
+                                <img src="assets/icons/icons8-no-entry-64.png" style="width: 32px;" />
+                            </i>
+                        </td>
+                        <td>
+                            <i *ngIf="item.SURVEY_MAP_PATH" class="fa" data-toggle="tooltip" title="ดาวน์โหลด">
+                                <a href="assets/icons/icons8-downloading-updates-64.png"
+                                    download="icons8-downloading-updates-64.png">
+                                    <img src="assets/icons/icons8-downloading-updates-64.png" style="width: 32px;" />
+                                </a>
+                            </i>
+                            <i *ngIf="!item.SURVEY_MAP_PATH" data-toggle="tooltip" title="ไม่มีไฟล์">
+                                <img src="assets/icons/icons8-no-entry-64.png" style="width: 32px;" />
+                            </i>
+                        </td>
+                        <td>
+                            <i *ngIf="item.SURVEY_LAYOUT_PATH" class="fa" data-toggle="tooltip" title="ดาวน์โหลด">
+                                <a href="assets/icons/icons8-downloading-updates-64.png"
+                                    download="icons8-downloading-updates-64.png">
+                                    <img src="assets/icons/icons8-downloading-updates-64.png" style="width: 32px;" />
+                                </a>
+                            </i>
+                            <i *ngIf="!item.SURVEY_LAYOUT_PATH" data-toggle="tooltip" title="ไม่มีไฟล์">
+                                <img src="assets/icons/icons8-no-entry-64.png" style="width: 32px;" />
+                            </i>
+                        </td>
+                        <td>
+                            <i *ngIf="item.PIPE_LINE_PATH" class="fa" data-toggle="tooltip" title="ดาวน์โหลด">
+                                <a href="assets/icons/icons8-downloading-updates-64.png"
+                                    download="icons8-downloading-updates-64.png">
+                                    <img src="assets/icons/icons8-downloading-updates-64.png" style="width: 32px;" />
+                                </a>
+                            </i>
+                            <i *ngIf="!item.PIPE_LINE_PATH" data-toggle="tooltip" title="ไม่มีไฟล์">
+                                <img src="assets/icons/icons8-no-entry-64.png" style="width: 32px;" />
+                            </i>
+                        </td>
+                        <td> {{ item.TOTAL_BUILDING }} / {{ item.TOTAL_PDF }} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination [(ngModel)]="startPage" [itemsPerPage]="limitPage" [rotate]="false" [maxSize]="10"
+                previousText="ก่อนหน้า" nextText="ถัดไป" [totalItems]="stationItems.length">
+            </pagination>
+            <!-- </div> -->
+        </div>
+
+    </div>
+
+</app-auth-content>

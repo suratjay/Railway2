@@ -1,0 +1,113 @@
+<app-auth-content>
+    <div class="row">
+        <button class="btn btn-primary" (click)="exportexcel()"><i class="fa fa-file-excel-o"></i> Export File</button>
+    </div>
+
+    <div class="row">
+        <div style="overflow-x:auto;">
+            <table id="excel-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div align="center">ลำดับ</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 80px;">กอง</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 80px;">รหัสสถานี</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 100px;">ชื่อสถานี</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 100px;">เลขที่แปลง</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 120px;">การใช้ประโยชน์</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 90px;">รูปร่างที่ดิน</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 160px;">ขนาดพื้นที่ (ตร.วา)</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ชื่อถนนหลักที่เข้าสู่ทรัพย์สิน</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 140px;">ประเภทผิวจราจร</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 130px;">สภาพแวดล้อม</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 130px;">ชื่อผังเมือง</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 120px;">ปีที่ประกาศใช้</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 160px;">เขตสีการใช้ประโยชน์</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 150px;">บริเวณหมายเลข </div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ประเภทการใช้ประโยชน์ </div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ราคาตลาด (บาท/ตร.ว.)</div>
+                        </th>                        
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ราคาประเมินตลาด (บาท)</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ราคาราชการ (บาท/ตร.ว.)</div>
+                        </th>                        
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ราคาประเมินราชการ (บาท)</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ราคาประเมิน (บาท/ตร.ว.)</div>
+                        </th>
+                        <th scope="col">
+                            <div align="center" style="width: 200px;">ราคาประเมินทั้งหมด (บาท)</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="center" *ngFor="let item of reportItems">
+                    <!-- <tr align="center" *ngFor="let item of reportItems  | pagination: startPage : limitPage"> -->
+                        <td> {{reportItems.indexOf(item)+1}} </td>
+                        <td> {{ item.DIVISION_NAME }} </td>
+                        <td> {{ item.STATION_CODE }} </td>
+                        <td> {{ item.STATION_DESC }} </td>
+                        <td> {{ item.ENTITYID}} </td>
+                        <td> {{ item.LAND_USE }} </td>
+                        <td> {{ item.LAND_SHP }} </td>
+                        <td> {{ item.LAND_AREA | number }} </td>
+                        <td> {{ item.ROAD_NAME }} </td>
+                        <td> {{ item.TRAFFIC_TYPE }} </td>
+                        <td> {{ item.ENVIRONMENT }} </td>
+                        <td> {{ item.CITY_PLAN_T }} </td>
+                        <td> {{ item.CITY_PLAN_YEAR }} </td>
+                        <td> {{ item.CITY_PLAN_COLOR }} </td>
+                        <td> {{ item.CITY_PLAN_NUMBER }} </td>
+                        <td> {{ item.CITY_PLAN_TYPE }} </td>
+                        <td> {{ item.MARKET_PRICE | number }} </td>
+                        <td> {{ item.SUM_MARKET_PRICE | number }} </td>
+                        <td> {{ item.OFFICIAL_PRICE | number }} </td>
+                        <td> {{ item.SUM_OFFICIAL_PRICE | number }} </td>
+                        <td> {{ item.P_NO_INFRINGEMENT | number }} </td>
+                        <td> {{ item.SUM_PRICE | number }} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination [(ngModel)]="startPage" [itemsPerPage]="limitPage" [rotate]="false" [maxSize]="10"
+                previousText="ก่อนหน้า" nextText="ถัดไป" [totalItems]="reportItems.length">
+            </pagination>
+        </div>
+    </div>
+
+</app-auth-content>

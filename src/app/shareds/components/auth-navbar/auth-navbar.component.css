@@ -1,0 +1,21 @@
+.nav-link{
+    cursor: pointer;
+}
+
+.app-sidebar__user-avatar{
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+
+.app-sidebar-ud{
+    width: 145px;
+}
+
+.a-white{
+    color: white;
+}
+
+/* .navbar{
+    
+} */
